@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Clinical Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI';
+            background: linear-gradient(to right, #e3f2fd, #f5f7fa);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 500px;
+            margin: auto;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .risk-bar {
+            height: 20px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .fill {
+            height: 100%;
+            width: {{ risk * 100 }}%;
+            background: linear-gradient(to right, green, orange, red);
+        }
+
+        .high { color: red; font-weight: bold; }
+        .medium { color: orange; font-weight: bold; }
+        .low { color: green; font-weight: bold; }
+
+        .section-title {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        ul {
+            text-align: left;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+        <h2>🧠 AI Clinical Risk Report</h2>
+
+        <p><strong>Risk Score:</strong> {{ risk }}</p>
+
+        <div class="risk-bar">
+            <div class="fill"></div>
+        </div>
+
+        <p>
+            <strong>Risk Level:</strong>
+            <span class="{{ level|lower }}">{{ level }}</span>
+        </p>
+
+        <p style="margin-top:10px; font-style: italic;">
+            This score represents the probability of preterm complications based on current clinical indicators.
+        </p>
+
+        <p class="section-title">⚠️ Key Risk Drivers</p>
+        <ul>
+            {% for d in drivers %}
+                <li>{{ d }}</li>
+            {% endfor %}
+        </ul>
+
+        <p class="section-title">📋 Recommended Action</p>
+        <p>{{ action }}</p>
+    </div>
+
+    <div class="card">
+        <p class="section-title">🔬 Why This Prediction Matters</p>
+        <p>
+            Preterm birth is a leading cause of neonatal mortality. Early risk detection enables timely intervention,
+            improving outcomes for both mother and child.
+        </p>
+
+        <p class="section-title">🧠 How AI Made This Decision</p>
+        <p>
+            The system evaluates clinical indicators such as hemoglobin, CRP, WBC, vital signs, and gestation age,
+            all of which are medically linked to preterm birth risk.
+        </p>
+
+        <p class="section-title">🏥 Clinical Insight</p>
+        <p>
+            Abnormal vitals, infections (high CRP/WBC), and low hemoglobin are strong indicators of maternal stress,
+            which increases the likelihood of premature labor.
+        </p>
+    </div>
+
+    <a href="/">🔙 New Prediction</a>
+
+</div>
+
+</body>
+</html>
